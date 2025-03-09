@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Bell, MessageSquare, Pill, Coffee, Activity } from 'lucide-react';
+import { Menu, X, Bell, MessageSquare, LogIn } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -71,6 +71,13 @@ const Header = () => {
             >
               <span>Voice Blog</span>
             </Link>
+            <Link 
+              to="/signup" 
+              className={`flex items-center space-x-2 transition-colors hover:text-primary ${isActive('/signup') ? 'text-primary' : ''}`}
+            >
+              <LogIn className="h-5 w-5" />
+              <span>Sign Up</span>
+            </Link>
           </nav>
 
           {/* Mobile menu button */}
@@ -126,6 +133,14 @@ const Header = () => {
           >
             <MessageSquare className="h-5 w-5" />
             <span className="text-lg">Voice Blog</span>
+          </Link>
+          <Link 
+            to="/signup" 
+            className={`flex items-center space-x-3 p-2 rounded-md ${isActive('/signup') ? 'bg-primary/10 text-primary' : ''}`}
+            onClick={closeMenu}
+          >
+            <LogIn className="h-5 w-5" />
+            <span className="text-lg">Sign Up</span>
           </Link>
         </nav>
       </div>
