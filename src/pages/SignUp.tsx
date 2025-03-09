@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -13,6 +13,13 @@ const SignUp = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  // Check if already logged in
+  useEffect(() => {
+    if (localStorage.getItem("authenticated") === "true") {
+      navigate('/');
+    }
+  }, [navigate]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -21,6 +28,9 @@ const SignUp = () => {
     // For this demo, we'll accept any code with at least 4 characters
     setTimeout(() => {
       if (code.length >= 4) {
+        // Set authentication state
+        localStorage.setItem("authenticated", "true");
+        
         toast({
           title: "Welcome to ElderCare!",
           description: "You have successfully signed up.",
