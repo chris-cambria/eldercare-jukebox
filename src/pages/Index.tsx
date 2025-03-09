@@ -1,8 +1,7 @@
 
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Pill, Coffee, Activity, ArrowRight, Bell, MessageSquare, Mic, User } from 'lucide-react';
-import { Button } from "@/components/ui/button";
+import { Link } from 'react-router-dom';
+import { Pill, Coffee, Activity, ArrowRight, Bell } from 'lucide-react';
 import Header from '../components/Header';
 import Carousel from '../components/Carousel';
 import ReminderCard, { ReminderType } from '../components/ReminderCard';
@@ -76,7 +75,6 @@ const communitySamples = [
 
 const Index = () => {
   const [reminders, setReminders] = useState(initialReminders);
-  const navigate = useNavigate();
 
   const toggleReminder = (id: string) => {
     setReminders(reminders.map(reminder => 
@@ -113,47 +111,6 @@ const Index = () => {
           </p>
           
           <Carousel images={placeholderImages} interval={5000} />
-        </section>
-        
-        {/* Main Navigation Buttons */}
-        <section className="mb-12 animate-fade-in" style={{ animationDelay: '50ms' }}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Button 
-              variant="outline" 
-              onClick={() => navigate('/reminders')}
-              className="h-24 flex-col gap-2 p-4"
-            >
-              <Bell className="h-8 w-8" />
-              <span>Reminders</span>
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              onClick={() => navigate('/community')}
-              className="h-24 flex-col gap-2 p-4"
-            >
-              <MessageSquare className="h-8 w-8" />
-              <span>Community</span>
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              onClick={() => navigate('/voice-blog')}
-              className="h-24 flex-col gap-2 p-4"
-            >
-              <Mic className="h-8 w-8" />
-              <span>Voice Blog</span>
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              onClick={() => navigate('/sign-in')}
-              className="h-24 flex-col gap-2 p-4"
-            >
-              <User className="h-8 w-8" />
-              <span>Sign In</span>
-            </Button>
-          </div>
         </section>
         
         {/* Recent Reminders */}

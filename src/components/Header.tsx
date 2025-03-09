@@ -1,14 +1,12 @@
 
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Bell, MessageSquare, Mic, User } from 'lucide-react';
-import { Button } from "@/components/ui/button";
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, Bell, MessageSquare, Pill, Coffee, Activity } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,16 +73,6 @@ const Header = () => {
             </Link>
           </nav>
 
-          {/* Sign In Button */}
-          <Button 
-            variant="outline" 
-            onClick={() => navigate('/sign-in')}
-            className="hidden md:flex items-center"
-          >
-            <User className="mr-2 h-4 w-4" />
-            Sign In
-          </Button>
-
           {/* Mobile menu button */}
           <button 
             onClick={toggleMenu} 
@@ -136,16 +124,8 @@ const Header = () => {
             className={`flex items-center space-x-3 p-2 rounded-md ${isActive('/voice-blog') ? 'bg-primary/10 text-primary' : ''}`}
             onClick={closeMenu}
           >
-            <Mic className="h-5 w-5" />
+            <MessageSquare className="h-5 w-5" />
             <span className="text-lg">Voice Blog</span>
-          </Link>
-          <Link 
-            to="/sign-in" 
-            className={`flex items-center space-x-3 p-2 rounded-md ${isActive('/sign-in') ? 'bg-primary/10 text-primary' : ''}`}
-            onClick={closeMenu}
-          >
-            <User className="h-5 w-5" />
-            <span className="text-lg">Sign In</span>
           </Link>
         </nav>
       </div>
