@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Reminders from "./pages/Reminders";
 import Community from "./pages/Community";
 import VoiceBlog from "./pages/VoiceBlog";
+import SignIn from "./pages/SignIn";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/reminders" element={<Reminders />} />
           <Route path="/community" element={<Community />} />
           <Route path="/voice-blog" element={<VoiceBlog />} />
+          <Route path="/sign-in" element={<SignIn />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
