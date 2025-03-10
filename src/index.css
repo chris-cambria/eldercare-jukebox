@@ -45,6 +45,7 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-size: 18px; /* Increased base font size */
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -52,19 +53,19 @@
   }
   
   h1 {
-    @apply text-4xl;
+    @apply text-5xl; /* Increased from 4xl */
   }
   
   h2 {
-    @apply text-3xl;
+    @apply text-4xl; /* Increased from 3xl */
   }
   
   h3 {
-    @apply text-2xl;
+    @apply text-3xl; /* Increased from 2xl */
   }
   
   h4 {
-    @apply text-xl;
+    @apply text-2xl; /* Increased from xl */
   }
   
   .container {
@@ -77,6 +78,20 @@
   
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-opacity-75;
+  }
+
+  /* Increased font sizes for improved readability for elderly */
+  p, span, div, button, a, li {
+    @apply text-lg; /* Base text size increase */
+  }
+
+  input, select, textarea {
+    @apply text-lg;
+  }
+
+  /* High contrast elements */
+  .high-contrast {
+    @apply text-black bg-white border-2 border-black;
   }
 }
 
@@ -114,4 +129,16 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Emergency button */
+.emergency-button {
+  @apply fixed bottom-6 right-6 w-16 h-16 rounded-full bg-red-600 text-white 
+  flex items-center justify-center shadow-lg hover:bg-red-700 focus:ring-4 
+  focus:ring-red-300 z-50 animate-pulse;
+}
+
+/* Reported user styles */
+.reported-user {
+  @apply text-red-900 font-bold;
 }

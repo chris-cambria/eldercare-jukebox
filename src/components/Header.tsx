@@ -1,12 +1,16 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Bell, MessageSquare, LogIn } from 'lucide-react';
+import { Menu, X, Bell, MessageSquare, LogIn, Mic, MicOff, Phone, AlertTriangle } from 'lucide-react';
+import { useVoiceNavigation } from '../providers/VoiceNavigationProvider';
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { isListening, toggleVoiceControl, isSupported } = useVoiceNavigation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,6 +49,31 @@ const Header = () => {
             <span className="text-xl font-semibold">எல்டர்கேர்</span>
           </Link>
 
+          {/* Voice control button */}
+          {isSupported && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    onClick={toggleVoiceControl}
+                    variant="outline"
+                    size="icon"
+                    className="mr-2 md:mr-4"
+                  >
+                    {isListening ? (
+                      <Mic className="h-5 w-5 text-primary" />
+                    ) : (
+                      <MicOff className="h-5 w-5" />
+                    )}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{isListening ? 'குரல் கட்டுப்பாட்டை நிறுத்து' : 'குரல் கட்டுப்பாட்டை செயல்படுத்து'}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+
           {/* Desktop navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link 
@@ -70,6 +99,13 @@ const Header = () => {
               className={`flex items-center space-x-2 transition-colors hover:text-primary ${isActive('/voice-blog') ? 'text-primary' : ''}`}
             >
               <span>குரல் வலைப்பதிவு</span>
+            </Link>
+            <Link 
+              to="/helpline" 
+              className={`flex items-center space-x-2 transition-colors hover:text-primary ${isActive('/helpline') ? 'text-primary' : ''}`}
+            >
+              <Phone className="h-5 w-5" />
+              <span>உதவி எண்</span>
             </Link>
             <Link 
               to="/signup" 
@@ -135,12 +171,58 @@ const Header = () => {
             <span className="text-lg">குரல் வலைப்பதிவு</span>
           </Link>
           <Link 
+            to="/helpline" 
+            className={`flex items-center space-x-3 p-2 rounded-md ${isActive('/helpline') ? 'bg-primary/10 text-primary' : ''}`}
+            onClick={closeMenu}
+          >
+            <Phone className="h-5 w-5" />
+            <span className="text-lg">உதவி எண்</span>
+          </Link>
+          <Link 
             to="/signup" 
             className={`flex items-center space-x-3 p-2 rounded-md ${isActive('/signup') ? 'bg-primary/10 text-primary' : ''}`}
             onClick={closeMenu}
           >
             <LogIn className="h-5 w-5" />
             <span className="text-lg">பதிவு செய்க</span>
+          </Link>
+          
+          {/* Voice control in mobile menu */}
+          {isSupported && (
+            <Button 
+              onClick={() => {
+                toggleVoiceControl();
+                closeMenu();
+              }}
+              variant="outline"
+              className="flex items-center justify-start space-x-3 p-2 w-full"
+            >
+              {isListening ? (
+                <>
+                  <Mic className="h-5 w-5 text-primary" />
+                  <span className="text-lg">குரல் கட்டுப்பாட்டை நிறுத்து</span>
+                </>
+              ) : (
+                <>
+                  <MicOff className="h-5 w-5" />
+                  <span className="text-lg">குரல் கட்டுப்பாட்டை செயல்படுத்து</span>
+                </>
+              )}
+            </Button>
+          )}
+          
+          {/* Emergency button in mobile menu */}
+          <Link 
+            to="#" 
+            className="flex items-center space-x-3 p-2 rounded-md bg-red-100 text-red-600"
+            onClick={(e) => {
+              e.preventDefault();
+              closeMenu();
+              window.open('tel:112', '_self');
+            }}
+          >
+            <AlertTriangle className="h-5 w-5" />
+            <span className="text-lg">அவசர உதவி</span>
           </Link>
         </nav>
       </div>

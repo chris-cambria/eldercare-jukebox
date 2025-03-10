@@ -11,6 +11,9 @@ import VoiceBlog from "./pages/VoiceBlog";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
 import CommunityChat from "./pages/CommunityChat";
+import Helpline from "./pages/Helpline";
+import EmergencyButton from "./components/EmergencyButton";
+import { VoiceNavigationProvider } from "./providers/VoiceNavigationProvider";
 
 const queryClient = new QueryClient();
 
@@ -33,50 +36,78 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/signup" element={<SignUp />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Index />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/reminders"
-            element={
-              <ProtectedRoute>
-                <Reminders />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/community"
-            element={
-              <ProtectedRoute>
-                <Community />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/community/:id"
-            element={
-              <ProtectedRoute>
-                <CommunityChat />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/voice-blog"
-            element={
-              <ProtectedRoute>
-                <VoiceBlog />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <VoiceNavigationProvider>
+          <Routes>
+            <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <>
+                    <Index />
+                    <EmergencyButton />
+                  </>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/reminders"
+              element={
+                <ProtectedRoute>
+                  <>
+                    <Reminders />
+                    <EmergencyButton />
+                  </>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/community"
+              element={
+                <ProtectedRoute>
+                  <>
+                    <Community />
+                    <EmergencyButton />
+                  </>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/community/:id"
+              element={
+                <ProtectedRoute>
+                  <>
+                    <CommunityChat />
+                    <EmergencyButton />
+                  </>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/voice-blog"
+              element={
+                <ProtectedRoute>
+                  <>
+                    <VoiceBlog />
+                    <EmergencyButton />
+                  </>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/helpline"
+              element={
+                <ProtectedRoute>
+                  <>
+                    <Helpline />
+                    <EmergencyButton />
+                  </>
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </VoiceNavigationProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
