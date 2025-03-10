@@ -9,6 +9,7 @@ import Reminders from "./pages/Reminders";
 import Community from "./pages/Community";
 import VoiceBlog from "./pages/VoiceBlog";
 import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 import NotFound from "./pages/NotFound";
 import CommunityChat from "./pages/CommunityChat";
 import Helpline from "./pages/Helpline";
@@ -18,39 +19,39 @@ import { useEffect, useState } from "react";
 
 const queryClient = new QueryClient();
 
-// Make sure all page props interfaces are defined correctly
+// Type augmentations for page components
 declare module "./pages/Index" {
-  interface IndexProps {
+  export interface IndexProps {
     onLogout: () => void;
   }
 }
 
 declare module "./pages/Reminders" {
-  interface RemindersProps {
+  export interface RemindersProps {
     onLogout: () => void;
   }
 }
 
 declare module "./pages/Community" {
-  interface CommunityProps {
+  export interface CommunityProps {
     onLogout: () => void;
   }
 }
 
 declare module "./pages/CommunityChat" {
-  interface CommunityChatProps {
+  export interface CommunityChatProps {
     onLogout: () => void;
   }
 }
 
 declare module "./pages/VoiceBlog" {
-  interface VoiceBlogProps {
+  export interface VoiceBlogProps {
     onLogout: () => void;
   }
 }
 
 declare module "./pages/Helpline" {
-  interface HelplineProps {
+  export interface HelplineProps {
     onLogout: () => void;
   }
 }
@@ -84,6 +85,12 @@ const App = () => {
                   isAuthenticated ? <Navigate to="/" /> : <SignUp setIsAuthenticated={setIsAuthenticated} />
                 } 
               />
+              <Route 
+                path="/signin" 
+                element={
+                  isAuthenticated ? <Navigate to="/" /> : <SignIn setIsAuthenticated={setIsAuthenticated} />
+                } 
+              />
               <Route
                 path="/"
                 element={
@@ -93,7 +100,7 @@ const App = () => {
                       <EmergencyButton />
                     </>
                   ) : (
-                    <Navigate to="/signup" />
+                    <Navigate to="/signin" />
                   )
                 }
               />
@@ -106,7 +113,7 @@ const App = () => {
                       <EmergencyButton />
                     </>
                   ) : (
-                    <Navigate to="/signup" />
+                    <Navigate to="/signin" />
                   )
                 }
               />
@@ -119,7 +126,7 @@ const App = () => {
                       <EmergencyButton />
                     </>
                   ) : (
-                    <Navigate to="/signup" />
+                    <Navigate to="/signin" />
                   )
                 }
               />
@@ -132,7 +139,7 @@ const App = () => {
                       <EmergencyButton />
                     </>
                   ) : (
-                    <Navigate to="/signup" />
+                    <Navigate to="/signin" />
                   )
                 }
               />
@@ -145,7 +152,7 @@ const App = () => {
                       <EmergencyButton />
                     </>
                   ) : (
-                    <Navigate to="/signup" />
+                    <Navigate to="/signin" />
                   )
                 }
               />
@@ -158,7 +165,7 @@ const App = () => {
                       <EmergencyButton />
                     </>
                   ) : (
-                    <Navigate to="/signup" />
+                    <Navigate to="/signin" />
                   )
                 }
               />
