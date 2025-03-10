@@ -42,7 +42,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2" onClick={closeMenu}>
             <Bell className="h-8 w-8 text-primary" />
-            <span className="text-xl font-semibold">ElderCare</span>
+            <span className="text-xl font-semibold">எல்டர்கேர்</span>
           </Link>
 
           {/* Desktop navigation */}
@@ -51,32 +51,32 @@ const Header = () => {
               to="/" 
               className={`flex items-center space-x-2 transition-colors hover:text-primary ${isActive('/') ? 'text-primary' : ''}`}
             >
-              <span>Home</span>
+              <span>முகப்பு</span>
             </Link>
             <Link 
               to="/reminders" 
               className={`flex items-center space-x-2 transition-colors hover:text-primary ${isActive('/reminders') ? 'text-primary' : ''}`}
             >
-              <span>Reminders</span>
+              <span>நினைவூட்டல்கள்</span>
             </Link>
             <Link 
               to="/community" 
               className={`flex items-center space-x-2 transition-colors hover:text-primary ${isActive('/community') ? 'text-primary' : ''}`}
             >
-              <span>Community</span>
+              <span>சமூகம்</span>
             </Link>
             <Link 
               to="/voice-blog" 
               className={`flex items-center space-x-2 transition-colors hover:text-primary ${isActive('/voice-blog') ? 'text-primary' : ''}`}
             >
-              <span>Voice Blog</span>
+              <span>குரல் வலைப்பதிவு</span>
             </Link>
             <Link 
               to="/signup" 
               className={`flex items-center space-x-2 transition-colors hover:text-primary ${isActive('/signup') ? 'text-primary' : ''}`}
             >
               <LogIn className="h-5 w-5" />
-              <span>Sign Up</span>
+              <span>பதிவு செய்க</span>
             </Link>
           </nav>
 
@@ -108,7 +108,7 @@ const Header = () => {
             onClick={closeMenu}
           >
             <Bell className="h-5 w-5" />
-            <span className="text-lg">Home</span>
+            <span className="text-lg">முகப்பு</span>
           </Link>
           <Link 
             to="/reminders" 
@@ -116,7 +116,7 @@ const Header = () => {
             onClick={closeMenu}
           >
             <Bell className="h-5 w-5" />
-            <span className="text-lg">Reminders</span>
+            <span className="text-lg">நினைவூட்டல்கள்</span>
           </Link>
           <Link 
             to="/community" 
@@ -124,7 +124,7 @@ const Header = () => {
             onClick={closeMenu}
           >
             <MessageSquare className="h-5 w-5" />
-            <span className="text-lg">Community</span>
+            <span className="text-lg">சமூகம்</span>
           </Link>
           <Link 
             to="/voice-blog" 
@@ -132,7 +132,7 @@ const Header = () => {
             onClick={closeMenu}
           >
             <MessageSquare className="h-5 w-5" />
-            <span className="text-lg">Voice Blog</span>
+            <span className="text-lg">குரல் வலைப்பதிவு</span>
           </Link>
           <Link 
             to="/signup" 
@@ -140,7 +140,7 @@ const Header = () => {
             onClick={closeMenu}
           >
             <LogIn className="h-5 w-5" />
-            <span className="text-lg">Sign Up</span>
+            <span className="text-lg">பதிவு செய்க</span>
           </Link>
         </nav>
       </div>

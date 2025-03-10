@@ -32,14 +32,14 @@ const SignUp = () => {
         localStorage.setItem("authenticated", "true");
         
         toast({
-          title: "Welcome to ElderCare!",
-          description: "You have successfully signed up.",
+          title: "எல்டர்கேர்-க்கு வரவேற்கிறோம்!",
+          description: "நீங்கள் வெற்றிகரமாக பதிவு செய்துள்ளீர்கள்.",
         });
         navigate('/');
       } else {
         toast({
-          title: "Invalid Code",
-          description: "Please enter a valid code (at least 4 characters).",
+          title: "தவறான குறியீடு",
+          description: "சரியான குறியீட்டை உள்ளிடவும் (குறைந்தது 4 எழுத்துக்கள்).",
           variant: "destructive",
         });
       }
@@ -51,9 +51,9 @@ const SignUp = () => {
     <div className="flex items-center justify-center min-h-screen bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Welcome to ElderCare</CardTitle>
+          <CardTitle className="text-2xl font-bold">எல்டர்கேர்-க்கு வரவேற்கிறோம்</CardTitle>
           <CardDescription>
-            Enter your access code to continue
+            தொடர அணுகல் குறியீட்டை உள்ளிடவும்
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
@@ -64,7 +64,7 @@ const SignUp = () => {
                 <Input
                   className="pl-10"
                   type="text"
-                  placeholder="Access Code"
+                  placeholder="அணுகல் குறியீடு"
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
                 />
@@ -76,12 +76,12 @@ const SignUp = () => {
               {isLoading ? (
                 <span className="flex items-center gap-2">
                   <span className="h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent"></span>
-                  Verifying...
+                  சரிபார்க்கிறது...
                 </span>
               ) : (
                 <span className="flex items-center gap-2">
                   <LogIn className="h-4 w-4" />
-                  Continue
+                  தொடரவும்
                 </span>
               )}
             </Button>

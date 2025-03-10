@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Mic, Save, Calendar, Info, Clock, Play, Pause, User } from 'lucide-react';
 import Header from '../components/Header';
@@ -29,8 +28,8 @@ interface VoiceBlogPost {
 const initialVoiceBlogs: VoiceBlogPost[] = [
   {
     id: '1',
-    title: 'My Gardening Tips',
-    description: 'Sharing some tips on how to take care of indoor plants',
+    title: 'என் தோட்டக்கலை குறிப்புகள்',
+    description: 'உள்ளரங்கத் தாவரங்களை எவ்வாறு பாதுகாப்பது என்பது குறித்த சில குறிப்புகளைப் பகிர்தல்',
     audioUrl: '/voice-blog-1.mp3', // Placeholder
     duration: 95, // seconds
     recordedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
@@ -38,8 +37,8 @@ const initialVoiceBlogs: VoiceBlogPost[] = [
   },
   {
     id: '2',
-    title: 'Favorite Song Memories',
-    description: 'Remembering the songs from my youth',
+    title: 'விருப்பமான பாடல் நினைவுகள்',
+    description: 'என் இளமைக்கால பாடல்களை நினைவுகூர்தல்',
     audioUrl: '/voice-blog-2.mp3', // Placeholder
     duration: 128, // seconds
     recordedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
@@ -71,7 +70,7 @@ const VoiceBlog = () => {
   
   const handleSavePost = () => {
     if (!recordedBlob || !newPost.title) {
-      toast.error("Please provide a title and record an audio message");
+      toast.error("தலைப்பு மற்றும் ஒலிப் பதிவைப் கொடுக்கவும்");
       return;
     }
     
@@ -88,7 +87,7 @@ const VoiceBlog = () => {
     };
     
     setVoiceBlogs([newVoiceBlog, ...voiceBlogs]);
-    toast.success("Voice blog post saved successfully");
+    toast.success("குரல் வலைப்பதிவை வெற்றிகரமாக சேமிக்கப்பட்டது");
     
     // Reset form
     setNewPost({
@@ -149,11 +148,11 @@ const VoiceBlog = () => {
       <Header />
       
       <main className="container pt-24 pb-16">
-        <h1 className="text-3xl font-bold mb-6">Voice Blog</h1>
+        <h1 className="text-3xl font-bold mb-6">குரல் வலைப்பதிவு</h1>
         
         {/* Record New Voice Blog */}
         <section className="mb-12 bg-card border rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">Record a New Voice Blog</h2>
+          <h2 className="text-xl font-semibold mb-4">புதிய குரல் வலைப்பதிவைப் பதிவு செய்யவும்</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-1 flex flex-col items-center justify-center p-6">
@@ -162,24 +161,24 @@ const VoiceBlog = () => {
             
             <div className="md:col-span-2 space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="title">Title</Label>
+                <Label htmlFor="title">தலைப்பு</Label>
                 <Input 
                   id="title"
                   name="title"
                   value={newPost.title}
                   onChange={handleInputChange}
-                  placeholder="Give your voice blog a title"
+                  placeholder="உங்கள் குரல் வலைப்பதிவுக்கு ஒரு தலைப்பைக் கொடுங்கள்"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="description">Description (Optional)</Label>
+                <Label htmlFor="description">விளக்கம் (விருப்பமானது)</Label>
                 <Textarea 
                   id="description"
                   name="description"
                   value={newPost.description}
                   onChange={handleInputChange}
-                  placeholder="Add a brief description of what your voice blog is about"
+                  placeholder="உங்கள் குரல் வலைப்பதிவு என்னவாக இருக்கிறது என்பதை சுருக்கமாக விவரிக்கவும்"
                   rows={3}
                 />
               </div>
@@ -190,12 +189,12 @@ const VoiceBlog = () => {
                 className="w-full mt-2"
               >
                 <Save className="h-4 w-4 mr-2" />
-                Save Voice Blog
+                குரல் வலைப்பதிவை சேமிக்கவும்
               </Button>
               
               <p className="text-xs text-muted-foreground mt-2">
-                Your voice blog will be submitted for review. After conversion to text, 
-                it may be monetized on third-party platforms with your permission.
+                உங்கள் குரல் வலைப்பதிவு மதிப்பாய்வுக்காக சமர்ப்பிக்கப்படும். உரைக்கு மாற்றப்பட்ட பின், 
+                உங்கள் அனுமதியுடன் மூன்றாம் தரப்பு தளங்களில் பணமாக்கப்படலாம்.
               </p>
             </div>
           </div>
@@ -203,7 +202,7 @@ const VoiceBlog = () => {
         
         {/* Voice Blog List */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Your Voice Blogs</h2>
+          <h2 className="text-xl font-semibold mb-4">உங்கள் குரல் வலைப்பதிவுகள்</h2>
           
           <Accordion type="single" collapsible className="space-y-4">
             {voiceBlogs.map((blog) => (
@@ -233,12 +232,12 @@ const VoiceBlog = () => {
                     <div className="flex items-center">
                       {blog.status === 'pending' && (
                         <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full mr-2">
-                          Pending Review
+                          மதிப்பாய்வு நிலுவையில்
                         </span>
                       )}
                       {blog.status === 'published' && (
                         <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full mr-2">
-                          Published
+                          வெளியிடப்பட்டது
                         </span>
                       )}
                     </div>
@@ -265,7 +264,7 @@ const VoiceBlog = () => {
                       </button>
                       
                       <div>
-                        <span className="text-sm font-medium">Voice Recording</span>
+                        <span className="text-sm font-medium">குரல் பதிவு</span>
                         <span className="text-xs text-muted-foreground block">
                           {formatTime(blog.duration)}
                         </span>
@@ -276,12 +275,12 @@ const VoiceBlog = () => {
                       {blog.status === 'published' ? (
                         <span className="flex items-center">
                           <User className="h-4 w-4 mr-1" />
-                          Shared with community
+                          சமூகத்துடன் பகிரப்பட்டது
                         </span>
                       ) : (
                         <span className="flex items-center">
                           <Info className="h-4 w-4 mr-1" />
-                          Awaiting review
+                          மதிப்பாய்வுக்காக காத்திருக்கிறது
                         </span>
                       )}
                     </div>
@@ -290,10 +289,10 @@ const VoiceBlog = () => {
                   {/* Developer note about monetization */}
                   <div className="mt-4 text-xs text-muted-foreground border-t pt-4">
                     <p>
-                      <strong>Note for developers:</strong> After recording, the voice blog is stored in the database. 
-                      Developers can access the voice message, manually convert it to text, and then upload it to a 
-                      third-party website for monetization. Users in the same community will receive a notification 
-                      24 hours after upload.
+                      <strong>மேம்பாட்டாளர்களுக்கான குறிப்பு:</strong> பதிவுக்குப் பிறகு, குரல் வலைப்பதிவு தரவுத்தளத்தில் சேமிக்கப்படுகிறது.
+                      மேம்பாட்டாளர்கள் குரல் செய்தியை அணுகி, கைமுறையாக உரைக்கு மாற்றி, பிறகு அதை பணமாக்கலுக்காக மூன்றாம் தரப்பு
+                      இணையதளத்தில் பதிவேற்றலாம். அதே சமூகத்தில் உள்ள பயனர்கள் பதிவேற்றப்பட்ட 24 மணிநேரத்திற்குப் பிறகு ஒரு
+                      அறிவிப்பைப் பெறுவார்கள்.
                     </p>
                   </div>
                 </AccordionContent>
@@ -303,9 +302,9 @@ const VoiceBlog = () => {
             {voiceBlogs.length === 0 && (
               <div className="text-center py-8">
                 <Mic className="h-12 w-12 mx-auto text-muted-foreground opacity-50 mb-4" />
-                <h3 className="text-xl font-medium mb-2">No voice blogs yet</h3>
+                <h3 className="text-xl font-medium mb-2">இன்னும் குரல் வலைப்பதிவுகள் இல்லை</h3>
                 <p className="text-muted-foreground mb-6">
-                  Start recording to create your first voice blog.
+                  உங்கள் முதல் குரல் வலைப்பதிவை உருவாக்க பதிவு செய்யத் தொடங்குங்கள்.
                 </p>
               </div>
             )}

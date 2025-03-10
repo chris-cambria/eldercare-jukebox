@@ -16,54 +16,54 @@ const initialReminders = [
   {
     id: '1',
     type: 'medication' as ReminderType,
-    title: 'Blood Pressure Medicine',
+    title: 'இரத்த அழுத்த மருந்து',
     time: '8:00 AM',
-    description: 'Take with water after breakfast',
+    description: 'காலை உணவுக்குப் பிறகு தண்ணீருடன் எடுக்கவும்',
     voiceAlert: '/medication-reminder.mp3', // Placeholder path
     isActive: true,
   },
   {
     id: '2',
     type: 'medication' as ReminderType,
-    title: 'Diabetes Medication',
+    title: 'நீரிழிவு மருந்து',
     time: '9:00 AM',
-    description: 'Take after breakfast',
+    description: 'காலை உணவுக்குப் பிறகு எடுக்கவும்',
     voiceAlert: '/medication-reminder-2.mp3', // Placeholder path
     isActive: true,
   },
   {
     id: '3',
     type: 'meal' as ReminderType,
-    title: 'Breakfast',
+    title: 'காலை உணவு',
     time: '8:00 AM',
-    description: 'Don\'t skip breakfast',
+    description: 'காலை உணவைத் தவிர்க்காதீர்கள்',
     voiceAlert: '/meal-reminder.mp3', // Placeholder path
     isActive: true,
   },
   {
     id: '4',
     type: 'meal' as ReminderType,
-    title: 'Lunch Time',
+    title: 'மதிய உணவு நேரம்',
     time: '12:30 PM',
-    description: 'Remember to have a balanced meal',
+    description: 'சமச்சீரான உணவு சாப்பிட மறக்காதீர்கள்',
     voiceAlert: '/meal-reminder-2.mp3', // Placeholder path
     isActive: true,
   },
   {
     id: '5',
     type: 'exercise' as ReminderType,
-    title: 'Morning Stretch',
+    title: 'காலை நீட்சி',
     time: '7:30 AM',
-    description: '10 minutes of gentle stretching',
+    description: '10 நிமிடங்கள் மென்மையான நீட்சிப்பயிற்சி',
     voiceAlert: '/exercise-reminder.mp3', // Placeholder path
     isActive: true,
   },
   {
     id: '6',
     type: 'exercise' as ReminderType,
-    title: 'Evening Walk',
+    title: 'மாலை நடைப்பயிற்சி',
     time: '6:00 PM',
-    description: '30 minutes light walking',
+    description: '30 நிமிடங்கள் இலேசான நடைப்பயிற்சி',
     voiceAlert: '/exercise-reminder-2.mp3', // Placeholder path
     isActive: true,
   },
@@ -91,8 +91,8 @@ const Reminders = () => {
     // Show toast notification
     const reminder = reminders.find(r => r.id === id);
     if (reminder) {
-      const status = !reminder.isActive ? 'Activated' : 'Deactivated';
-      toast(`${status} reminder: ${reminder.title}`);
+      const status = !reminder.isActive ? 'செயல்படுத்தப்பட்டது' : 'செயலற்றதாக்கப்பட்டது';
+      toast(`${status} நினைவூட்டல்: ${reminder.title}`);
     }
   };
 
@@ -114,7 +114,7 @@ const Reminders = () => {
     
     // Basic validation
     if (!newReminder.title || !newReminder.time) {
-      toast.error("Please fill in all required fields");
+      toast.error("அனைத்து தேவையான புலங்களையும் நிரப்பவும்");
       return;
     }
     
@@ -127,7 +127,7 @@ const Reminders = () => {
     };
     
     setReminders([...reminders, createdReminder]);
-    toast.success(`Created reminder: ${newReminder.title}`);
+    toast.success(`நினைவூட்டல் உருவாக்கப்பட்டது: ${newReminder.title}`);
     
     // Reset form
     setNewReminder({
@@ -154,36 +154,36 @@ const Reminders = () => {
       
       <main className="container pt-24 pb-16">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Reminders</h1>
+          <h1 className="text-3xl font-bold">நினைவூட்டல்கள்</h1>
           
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button className="bg-primary hover:bg-primary/90">
                 <Plus className="h-4 w-4 mr-2" />
-                Add Reminder
+                நினைவூட்டல் சேர்க்க
               </Button>
             </DialogTrigger>
             
             <DialogContent className="sm:max-w-[425px]">
-              <DialogTitle>Create New Reminder</DialogTitle>
+              <DialogTitle>புதிய நினைவூட்டல் உருவாக்கு</DialogTitle>
               <DialogDescription>
-                Create a new reminder for medication, meals, or exercise.
+                மருந்து, உணவு அல்லது உடற்பயிற்சிக்கான புதிய நினைவூட்டலை உருவாக்கவும்.
               </DialogDescription>
               
               <form onSubmit={handleSubmit} className="space-y-4 mt-4">
                 <div className="space-y-2">
-                  <Label htmlFor="title">Title</Label>
+                  <Label htmlFor="title">தலைப்பு</Label>
                   <Input 
                     id="title"
                     name="title"
                     value={newReminder.title}
                     onChange={handleInputChange}
-                    placeholder="e.g., Blood Pressure Medicine"
+                    placeholder="எ.கா., இரத்த அழுத்த மருந்து"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label>Type</Label>
+                  <Label>வகை</Label>
                   <RadioGroup 
                     value={newReminder.type} 
                     onValueChange={handleTypeChange}
@@ -193,7 +193,7 @@ const Reminders = () => {
                       <RadioGroupItem value="medication" id="medication" />
                       <Label htmlFor="medication" className="flex items-center cursor-pointer">
                         <Pill className="h-4 w-4 mr-1" />
-                        Medication
+                        மருந்து
                       </Label>
                     </div>
                     
@@ -201,7 +201,7 @@ const Reminders = () => {
                       <RadioGroupItem value="meal" id="meal" />
                       <Label htmlFor="meal" className="flex items-center cursor-pointer">
                         <Coffee className="h-4 w-4 mr-1" />
-                        Meal
+                        உணவு
                       </Label>
                     </div>
                     
@@ -209,14 +209,14 @@ const Reminders = () => {
                       <RadioGroupItem value="exercise" id="exercise" />
                       <Label htmlFor="exercise" className="flex items-center cursor-pointer">
                         <Activity className="h-4 w-4 mr-1" />
-                        Exercise
+                        உடற்பயிற்சி
                       </Label>
                     </div>
                   </RadioGroup>
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="time">Time</Label>
+                  <Label htmlFor="time">நேரம்</Label>
                   <Input 
                     id="time"
                     name="time"
@@ -227,36 +227,36 @@ const Reminders = () => {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="description">Description (Optional)</Label>
+                  <Label htmlFor="description">விளக்கம் (விருப்பமானது)</Label>
                   <Textarea 
                     id="description"
                     name="description"
                     value={newReminder.description}
                     onChange={handleInputChange}
-                    placeholder="Additional details about this reminder"
+                    placeholder="இந்த நினைவூட்டலைப் பற்றிய கூடுதல் விவரங்கள்"
                     rows={3}
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="voiceAlert">Voice Alert (Optional)</Label>
+                  <Label htmlFor="voiceAlert">குரல் எச்சரிக்கை (விருப்பமானது)</Label>
                   <Input 
                     id="voiceAlert"
                     name="voiceAlert"
                     value={newReminder.voiceAlert}
                     onChange={handleInputChange}
-                    placeholder="Path to audio file, e.g., /audio/reminder.mp3"
+                    placeholder="ஒலிக் கோப்பிற்கான பாதை, எ.கா., /audio/reminder.mp3"
                   />
                   <p className="text-xs text-muted-foreground">
-                    Add Tamil comedy audio clips to the public folder and specify the path.
+                    தமிழ் நகைச்சுவை ஒலிக் கோப்புகளை பொது கோப்புறையில் சேர்த்து பாதையைக் குறிப்பிடவும்.
                   </p>
                 </div>
                 
                 <div className="flex justify-end space-x-2 pt-2">
                   <DialogClose asChild>
-                    <Button variant="outline" type="button">Cancel</Button>
+                    <Button variant="outline" type="button">ரத்து செய்</Button>
                   </DialogClose>
-                  <Button type="submit">Create Reminder</Button>
+                  <Button type="submit">உருவாக்கு</Button>
                 </div>
               </form>
             </DialogContent>
@@ -271,7 +271,7 @@ const Reminders = () => {
             className="flex items-center"
           >
             <Bell className="h-4 w-4 mr-2" />
-            All
+            அனைத்தும்
           </Button>
           
           <Button 
@@ -280,7 +280,7 @@ const Reminders = () => {
             className="flex items-center"
           >
             <Pill className="h-4 w-4 mr-2" />
-            Medication
+            மருந்துகள்
           </Button>
           
           <Button 
@@ -289,7 +289,7 @@ const Reminders = () => {
             className="flex items-center"
           >
             <Coffee className="h-4 w-4 mr-2" />
-            Meals
+            உணவுகள்
           </Button>
           
           <Button 
@@ -298,7 +298,7 @@ const Reminders = () => {
             className="flex items-center"
           >
             <Activity className="h-4 w-4 mr-2" />
-            Exercise
+            உடற்பயிற்சி
           </Button>
         </div>
         
@@ -315,18 +315,20 @@ const Reminders = () => {
           {filteredReminders.length === 0 && (
             <div className="col-span-full py-8 text-center">
               <Clock className="h-12 w-12 mx-auto text-muted-foreground opacity-50 mb-4" />
-              <h3 className="text-xl font-medium mb-2">No {filter !== 'all' ? filter : ''} reminders found</h3>
+              <h3 className="text-xl font-medium mb-2">
+                {filter !== 'all' ? `${filter === 'medication' ? 'மருந்து' : filter === 'meal' ? 'உணவு' : 'உடற்பயிற்சி'} நினைவூட்டல்கள் எதுவும் இல்லை` : "நினைவூட்டல்கள் எதுவும் இல்லை"}
+              </h3>
               <p className="text-muted-foreground">
                 {filter !== 'all' 
-                  ? `You don't have any ${filter} reminders yet.` 
-                  : "You don't have any reminders yet."}
+                  ? `இன்னும் எந்த ${filter === 'medication' ? 'மருந்து' : filter === 'meal' ? 'உணவு' : 'உடற்பயிற்சி'} நினைவூட்டல்களும் இல்லை.` 
+                  : "இன்னும் எந்த நினைவூட்டல்களும் இல்லை."}
               </p>
               <Button 
                 className="mt-4"
                 onClick={() => setIsDialogOpen(true)}
               >
                 <Plus className="h-4 w-4 mr-2" />
-                Add Reminder
+                நினைவூட்டல் சேர்க்க
               </Button>
             </div>
           )}
