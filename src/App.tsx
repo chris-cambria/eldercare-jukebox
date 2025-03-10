@@ -18,9 +18,41 @@ import { useEffect, useState } from "react";
 
 const queryClient = new QueryClient();
 
-// Define props interfaces for components that need onLogout
-interface PageProps {
-  onLogout: () => void;
+// Make sure all page props interfaces are defined correctly
+declare module "./pages/Index" {
+  interface IndexProps {
+    onLogout: () => void;
+  }
+}
+
+declare module "./pages/Reminders" {
+  interface RemindersProps {
+    onLogout: () => void;
+  }
+}
+
+declare module "./pages/Community" {
+  interface CommunityProps {
+    onLogout: () => void;
+  }
+}
+
+declare module "./pages/CommunityChat" {
+  interface CommunityChatProps {
+    onLogout: () => void;
+  }
+}
+
+declare module "./pages/VoiceBlog" {
+  interface VoiceBlogProps {
+    onLogout: () => void;
+  }
+}
+
+declare module "./pages/Helpline" {
+  interface HelplineProps {
+    onLogout: () => void;
+  }
 }
 
 const App = () => {
