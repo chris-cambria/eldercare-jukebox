@@ -14,103 +14,124 @@ import CommunityChat from "./pages/CommunityChat";
 import Helpline from "./pages/Helpline";
 import EmergencyButton from "./components/EmergencyButton";
 import { VoiceNavigationProvider } from "./providers/VoiceNavigationProvider";
+import { useEffect, useState } from "react";
 
 const queryClient = new QueryClient();
 
-// Simple auth check function
-const isAuthenticated = () => {
-  return localStorage.getItem("authenticated") === "true";
-};
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-// Protected route component
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  if (!isAuthenticated()) {
-    return <Navigate to="/signup" replace />;
-  }
-  return children;
-};
+  // Check authentication status on app load
+  useEffect(() => {
+    const authStatus = localStorage.getItem("authenticated") === "true";
+    setIsAuthenticated(authStatus);
+  }, []);
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <VoiceNavigationProvider>
-          <Routes>
-            <Route path="/signup" element={<SignUp />} />
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <>
-                    <Index />
-                    <EmergencyButton />
-                  </>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/reminders"
-              element={
-                <ProtectedRoute>
-                  <>
-                    <Reminders />
-                    <EmergencyButton />
-                  </>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/community"
-              element={
-                <ProtectedRoute>
-                  <>
-                    <Community />
-                    <EmergencyButton />
-                  </>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/community/:id"
-              element={
-                <ProtectedRoute>
-                  <>
-                    <CommunityChat />
-                    <EmergencyButton />
-                  </>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/voice-blog"
-              element={
-                <ProtectedRoute>
-                  <>
-                    <VoiceBlog />
-                    <EmergencyButton />
-                  </>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/helpline"
-              element={
-                <ProtectedRoute>
-                  <>
-                    <Helpline />
-                    <EmergencyButton />
-                  </>
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </VoiceNavigationProvider>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+  // Function to handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("authenticated");
+    setIsAuthenticated(false);
+  };
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <VoiceNavigationProvider>
+            <Routes>
+              <Route 
+                path="/signup" 
+                element={
+                  isAuthenticated ? <Navigate to="/" /> : <SignUp setIsAuthenticated={setIsAuthenticated} />
+                } 
+              />
+              <Route
+                path="/"
+                element={
+                  isAuthenticated ? (
+                    <>
+                      <Index onLogout={handleLogout} />
+                      <EmergencyButton />
+                    </>
+                  ) : (
+                    <Navigate to="/signup" />
+                  )
+                }
+              />
+              <Route
+                path="/reminders"
+                element={
+                  isAuthenticated ? (
+                    <>
+                      <Reminders onLogout={handleLogout} />
+                      <EmergencyButton />
+                    </>
+                  ) : (
+                    <Navigate to="/signup" />
+                  )
+                }
+              />
+              <Route
+                path="/community"
+                element={
+                  isAuthenticated ? (
+                    <>
+                      <Community onLogout={handleLogout} />
+                      <EmergencyButton />
+                    </>
+                  ) : (
+                    <Navigate to="/signup" />
+                  )
+                }
+              />
+              <Route
+                path="/community/:id"
+                element={
+                  isAuthenticated ? (
+                    <>
+                      <CommunityChat onLogout={handleLogout} />
+                      <EmergencyButton />
+                    </>
+                  ) : (
+                    <Navigate to="/signup" />
+                  )
+                }
+              />
+              <Route
+                path="/voice-blog"
+                element={
+                  isAuthenticated ? (
+                    <>
+                      <VoiceBlog onLogout={handleLogout} />
+                      <EmergencyButton />
+                    </>
+                  ) : (
+                    <Navigate to="/signup" />
+                  )
+                }
+              />
+              <Route
+                path="/helpline"
+                element={
+                  isAuthenticated ? (
+                    <>
+                      <Helpline onLogout={handleLogout} />
+                      <EmergencyButton />
+                    </>
+                  ) : (
+                    <Navigate to="/signup" />
+                  )
+                }
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </VoiceNavigationProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

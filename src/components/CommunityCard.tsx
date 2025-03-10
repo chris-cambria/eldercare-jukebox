@@ -26,7 +26,7 @@ const CommunityCard = ({
     >
       <div className="flex">
         <div 
-          className="w-12 h-12 rounded-lg flex items-center justify-center bg-primary/10 text-primary mr-4 overflow-hidden"
+          className="w-16 h-16 rounded-lg flex items-center justify-center bg-primary/10 text-primary mr-4 overflow-hidden"
         >
           {imageUrl ? (
             <img 
@@ -35,29 +35,29 @@ const CommunityCard = ({
               className="w-full h-full object-cover"
             />
           ) : (
-            <Users className="h-6 w-6" />
+            <Users className="h-8 w-8" />
           )}
         </div>
         
         <div className="flex-1">
           <div className="flex justify-between items-start">
-            <h3 className="font-medium text-lg">{name}</h3>
-            <ChevronRight className="h-5 w-5 text-muted-foreground" />
+            <h3 className="font-medium text-2xl">{name}</h3>
+            <ChevronRight className="h-6 w-6 text-muted-foreground" />
           </div>
           
-          <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+          <p className="text-xl text-muted-foreground mt-1 line-clamp-2">
             {description}
           </p>
           
-          <div className="flex items-center mt-3 text-xs text-muted-foreground">
+          <div className="flex items-center mt-3 text-lg text-muted-foreground">
             <div className="flex items-center mr-4">
-              <Users className="h-3.5 w-3.5 mr-1" />
-              <span>{memberCount} members</span>
+              <Users className="h-5 w-5 mr-1" />
+              <span>{memberCount} உறுப்பினர்கள்</span>
             </div>
             
             <div className="flex items-center">
-              <MessageSquare className="h-3.5 w-3.5 mr-1" />
-              <span>{messageCount} messages</span>
+              <MessageSquare className="h-5 w-5 mr-1" />
+              <span>{messageCount} செய்திகள்</span>
             </div>
           </div>
         </div>

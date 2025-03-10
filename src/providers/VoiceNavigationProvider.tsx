@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import voiceControl from '../services/voiceControl';
 import { toast } from 'sonner';
+import VoiceCommandPopup from '../components/VoiceCommandPopup';
 
 type VoiceNavigationContextType = {
   isListening: boolean;
@@ -23,14 +24,26 @@ export const VoiceNavigationProvider: React.FC<{ children: React.ReactNode }> = 
   const setupVoiceCommands = () => {
     // Navigation commands
     voiceControl.registerCommand('முகப்பு', () => navigate('/'));
+    voiceControl.registerCommand('முகப்பு செல்க', () => navigate('/'));
     voiceControl.registerCommand('நினைவூட்டல்கள்', () => navigate('/reminders'));
+    voiceControl.registerCommand('நினைவூட்டல்கள் செல்க', () => navigate('/reminders'));
     voiceControl.registerCommand('சமூகம்', () => navigate('/community'));
+    voiceControl.registerCommand('சமூகம் செல்க', () => navigate('/community'));
     voiceControl.registerCommand('குரல் வலைப்பதிவு', () => navigate('/voice-blog'));
+    voiceControl.registerCommand('குரல் வலைப்பதிவு செல்க', () => navigate('/voice-blog'));
     voiceControl.registerCommand('உதவி', () => navigate('/helpline'));
+    voiceControl.registerCommand('உதவி எண்', () => navigate('/helpline'));
+    voiceControl.registerCommand('உதவி எண் செல்க', () => navigate('/helpline'));
     
     // Emergency command
     voiceControl.registerCommand('அவசரம்', () => {
       triggerEmergency();
+    });
+
+    // Logout command
+    voiceControl.registerCommand('வெளியேறு', () => {
+      localStorage.removeItem("authenticated");
+      navigate('/signup');
     });
   };
 
@@ -98,6 +111,7 @@ export const VoiceNavigationProvider: React.FC<{ children: React.ReactNode }> = 
       }}
     >
       {children}
+      {isSupported && isListening && <VoiceCommandPopup />}
     </VoiceNavigationContext.Provider>
   );
 };

@@ -32,13 +32,13 @@ const ReminderCard = ({
   const getIcon = () => {
     switch (type) {
       case 'medication':
-        return <Pill className="h-6 w-6" />;
+        return <Pill className="h-8 w-8" />;
       case 'meal':
-        return <Coffee className="h-6 w-6" />;
+        return <Coffee className="h-8 w-8" />;
       case 'exercise':
-        return <Activity className="h-6 w-6" />;
+        return <Activity className="h-8 w-8" />;
       default:
-        return <Bell className="h-6 w-6" />;
+        return <Bell className="h-8 w-8" />;
     }
   };
 
@@ -57,7 +57,7 @@ const ReminderCard = ({
 
   const handlePlay = () => {
     if (!voiceAlert) {
-      toast.error("No voice alert available for this reminder");
+      toast.error("இந்த நினைவூட்டலுக்கு குரல் எச்சரிக்கை இல்லை");
       return;
     }
 
@@ -77,7 +77,7 @@ const ReminderCard = ({
     
     newAudio.play().catch(error => {
       console.error("Error playing audio:", error);
-      toast.error("Could not play audio");
+      toast.error("ஒலியை இயக்க முடியவில்லை");
       setIsPlaying(false);
     });
     
@@ -86,7 +86,7 @@ const ReminderCard = ({
 
   return (
     <div 
-      className={`rounded-lg border p-4 transition-all duration-300 card-hover ${getTypeColor()}`}
+      className={`rounded-lg border p-6 transition-all duration-300 card-hover ${getTypeColor()}`}
     >
       <div className="flex justify-between items-start mb-4">
         <div className="flex items-center">
@@ -94,8 +94,8 @@ const ReminderCard = ({
             {getIcon()}
           </div>
           <div>
-            <h3 className="font-medium text-lg">{title}</h3>
-            <p className="text-sm opacity-80">{time}</p>
+            <h3 className="font-medium text-2xl">{title}</h3>
+            <p className="text-xl opacity-80">{time}</p>
           </div>
         </div>
         
@@ -106,35 +106,28 @@ const ReminderCard = ({
             checked={isActive}
             onChange={() => onToggle(id)}
           />
-          <div className={`relative w-11 h-6 rounded-full transition-colors duration-200 ease-in-out ${isActive ? 'bg-primary' : 'bg-gray-300'}`}>
+          <div className={`relative w-14 h-8 rounded-full transition-colors duration-200 ease-in-out ${isActive ? 'bg-primary' : 'bg-gray-300'}`}>
             <div 
-              className={`absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform duration-200 ease-in-out ${isActive ? 'translate-x-5' : 'translate-x-0'}`}
+              className={`absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-200 ease-in-out ${isActive ? 'translate-x-6' : 'translate-x-0'}`}
             />
           </div>
         </label>
       </div>
       
       {description && (
-        <p className="text-sm mb-4 opacity-90">{description}</p>
+        <p className="text-xl mb-4 opacity-90">{description}</p>
       )}
       
       {voiceAlert && (
         <button
           onClick={handlePlay}
-          className="flex items-center text-sm font-medium rounded-md p-2 hover:bg-white/50 transition-colors focus-ring"
+          className="flex items-center text-xl font-medium rounded-md p-3 hover:bg-white/50 transition-colors focus-ring"
           aria-label={isPlaying ? "Stop audio" : "Play audio alert"}
         >
-          {isPlaying ? <VolumeX className="h-4 w-4 mr-2" /> : <Volume2 className="h-4 w-4 mr-2" />}
-          {isPlaying ? "Stop Audio" : "Play Voice Alert"}
+          {isPlaying ? <VolumeX className="h-6 w-6 mr-2" /> : <Volume2 className="h-6 w-6 mr-2" />}
+          {isPlaying ? "குரல் எச்சரிக்கையை நிறுத்து" : "குரல் எச்சரிக்கையை இயக்கு"}
         </button>
       )}
-      
-      {/* Comment for customization */}
-      {/* 
-        To add custom Tamil comedy voice clips:
-        1. Add your MP3 files to the public folder
-        2. Pass the file path to the voiceAlert prop like: "/audio/your-clip.mp3"
-      */}
     </div>
   );
 };

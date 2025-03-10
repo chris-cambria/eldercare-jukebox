@@ -45,7 +45,7 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    font-size: 18px; /* Increased base font size */
+    font-size: 36px; /* Doubled from 18px to 36px */
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -53,19 +53,19 @@
   }
   
   h1 {
-    @apply text-5xl; /* Increased from 4xl */
+    @apply text-6xl; /* Increased from 5xl */
   }
   
   h2 {
-    @apply text-4xl; /* Increased from 3xl */
+    @apply text-5xl; /* Increased from 4xl */
   }
   
   h3 {
-    @apply text-3xl; /* Increased from 2xl */
+    @apply text-4xl; /* Increased from 3xl */
   }
   
   h4 {
-    @apply text-2xl; /* Increased from xl */
+    @apply text-3xl; /* Increased from 2xl */
   }
   
   .container {
@@ -82,11 +82,11 @@
 
   /* Increased font sizes for improved readability for elderly */
   p, span, div, button, a, li {
-    @apply text-lg; /* Base text size increase */
+    @apply text-2xl; /* Doubled from text-lg to text-2xl */
   }
 
   input, select, textarea {
-    @apply text-lg;
+    @apply text-2xl; /* Doubled from text-lg to text-2xl */
   }
 
   /* High contrast elements */
@@ -133,7 +133,7 @@
 
 /* Emergency button */
 .emergency-button {
-  @apply fixed bottom-6 right-6 w-16 h-16 rounded-full bg-red-600 text-white 
+  @apply fixed bottom-6 right-6 w-20 h-20 rounded-full bg-red-600 text-white 
   flex items-center justify-center shadow-lg hover:bg-red-700 focus:ring-4 
   focus:ring-red-300 z-50 animate-pulse;
 }
@@ -141,4 +141,16 @@
 /* Reported user styles */
 .reported-user {
   @apply text-red-900 font-bold;
+}
+
+/* Voice command help dialog */
+.voice-command-help {
+  @apply fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+  bg-white/90 p-6 rounded-lg shadow-lg z-50 max-w-md w-full
+  border-2 border-primary text-center backdrop-blur-md;
+}
+
+.voice-command-active {
+  @apply fixed top-24 right-6 bg-primary/20 text-primary font-medium
+  py-2 px-4 rounded-full shadow-md backdrop-blur-sm;
 }
