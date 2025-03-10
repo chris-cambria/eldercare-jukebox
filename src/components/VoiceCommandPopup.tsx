@@ -11,13 +11,9 @@ const VoiceCommandPopup = () => {
   const [activeCommand, setActiveCommand] = useState('');
 
   useEffect(() => {
-    // Show help dialog when voice control starts for the first time
+    // Show help dialog every time voice control starts
     if (isListening) {
-      const hasSeenHelp = localStorage.getItem('has-seen-voice-help');
-      if (!hasSeenHelp) {
-        setShowHelp(true);
-        localStorage.setItem('has-seen-voice-help', 'true');
-      }
+      setShowHelp(true);
     } else {
       setShowActiveCommand(false);
     }

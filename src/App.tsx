@@ -18,6 +18,11 @@ import { useEffect, useState } from "react";
 
 const queryClient = new QueryClient();
 
+// Define props interfaces for components that need onLogout
+interface PageProps {
+  onLogout: () => void;
+}
+
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 

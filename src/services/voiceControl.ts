@@ -2,7 +2,7 @@
 // Simple voice recognition and speech synthesis service for Tamil language
 
 class VoiceControlService {
-  private recognition: SpeechRecognition | null = null;
+  private recognition: any = null; // Using any to avoid TypeScript errors
   private synthesis: SpeechSynthesisUtterance;
   private isListening: boolean = false;
   private commandCallbacks: Map<string, () => void> = new Map();
@@ -17,14 +17,14 @@ class VoiceControlService {
     
     // Initialize speech recognition if available
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       this.recognition = new SpeechRecognition();
       this.recognition.continuous = true;
       this.recognition.interimResults = false;
       this.recognition.lang = 'ta-IN'; // Tamil language
       
       this.recognition.onresult = this.handleSpeechResult.bind(this);
-      this.recognition.onerror = (event) => {
+      this.recognition.onerror = (event: any) => {
         console.error('Speech recognition error', event.error);
       };
     } else {
